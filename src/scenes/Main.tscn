@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c7df16q2uq5gn" path="res://scripts/main_ui.gd" id="1_nxtc6"]
 [ext_resource type="Material" uid="uid://cmbcfxlkxxnwq" path="res://addons/TileMapDual/ghost_material.tres" id="1_rarhs"]
-[ext_resource type="Script" uid="uid://ddugjfgtovto6" path="res://scripts/network_manager.gd" id="1_vcsgt"]
 [ext_resource type="Script" uid="uid://cjk8nronimk5r" path="res://addons/TileMapDual/tile_map_dual.gd" id="3_c01mt"]
 [ext_resource type="Script" uid="uid://bauokgevukmrj" path="res://scripts/world_generation.gd" id="3_rarhs"]
 [ext_resource type="Texture2D" uid="uid://c01k0yb707ihk" path="res://assets/ground.png" id="4_c01mt"]
@@ -151,10 +150,7 @@ placeholder_text = "127.0.0.1"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="MainUI" unique_id=798211404]
 _spawnable_scenes = PackedStringArray("uid://bu2qp8q7o4y04")
-
-[node name="NetworkManager" type="Node2D" parent="." unique_id=615244548]
-script = ExtResource("1_vcsgt")
-player_scene = ExtResource("4_nxtc6")
+spawn_path = NodePath("../..")
 
 [node name="WorldGeneration" type="Node2D" parent="." unique_id=361600353 node_paths=PackedStringArray("tilemap_layer")]
 script = ExtResource("3_rarhs")

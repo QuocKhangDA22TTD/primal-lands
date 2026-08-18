@@ -42,21 +42,20 @@ func _on_host_button_pressed():
 	_spawn_player(1)
 
 func _on_join_button_pressed():
-	var ip = ip_input.text
-	if ip.strip_edges() == "":
-		ip = "127.0.0.1"
+	var ip = ip_input.text.strip_edges() # Xóa khoảng trắng 2 đầu
+	
+	# Kiểm tra xem IP có đúng định dạng IPv4/IPv6 không
+	if not ip.is_valid_ip_address():
+		print("Địa chỉ IP không hợp lệ!")
+		return
 		
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(ip, PORT)
 	if error != OK:
-		print("Lỗi kết nối Server: ", error)
+		print("Không thể khởi tạo Client: ", error)
 		return
 		
 	multiplayer.multiplayer_peer = peer
-	print("Đang kết nối tới Server...")
-	
-	# Ẩn UI Menu đi sau khi bấm Join
-	menu_container.hide()
 
 # --- XỬ LÝ SỰ KIỆN MẠNG (SERVER SIDE) ---
 
