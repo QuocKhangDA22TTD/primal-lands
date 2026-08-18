@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var camera: Camera2D = $Camera2D
 
 # Biến lưu hướng nhìn gần nhất (mặc định ban đầu nhìn xuống)
 var last_direction: Vector2 = Vector2.DOWN
@@ -13,6 +14,9 @@ func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 
 func _physics_process(_delta: float) -> void:
+
+	camera.enabled = is_multiplayer_authority()
+
 	# Nếu không phải nhân vật của máy này, bỏ qua nhận đầu vào phím
 	if not is_multiplayer_authority():
 		return
