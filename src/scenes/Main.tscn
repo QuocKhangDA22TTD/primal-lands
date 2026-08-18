@@ -134,3 +134,7 @@ tile_set = SubResource("TileSet_c01mt")
 script = ExtResource("3_c01mt")
 godot_4_3_compatibility = false
 metadata/_custom_type_script = "uid://cjk8nronimk5r"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=798211404]
+_spawnable_scenes = PackedStringArray("uid://bu2qp8q7o4y04")
+spawn_path = NodePath("..")
