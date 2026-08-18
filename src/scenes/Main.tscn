@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://qwotwt1skrpj"]
 
+[ext_resource type="Script" uid="uid://c7df16q2uq5gn" path="res://scripts/main_ui.gd" id="1_nxtc6"]
 [ext_resource type="Material" uid="uid://cmbcfxlkxxnwq" path="res://addons/TileMapDual/ghost_material.tres" id="1_rarhs"]
 [ext_resource type="Script" uid="uid://ddugjfgtovto6" path="res://scripts/network_manager.gd" id="1_vcsgt"]
 [ext_resource type="Script" uid="uid://cjk8nronimk5r" path="res://addons/TileMapDual/tile_map_dual.gd" id="3_c01mt"]
@@ -120,6 +121,37 @@ sources/0 = SubResource("TileSetAtlasSource_vcsgt")
 
 [node name="Main" type="Node2D" unique_id=1354294537]
 
+[node name="MainUI" type="Control" parent="." unique_id=2116651251]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_nxtc6")
+player_scene = ExtResource("4_nxtc6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainUI" unique_id=581219619]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 106.0
+offset_bottom = 117.0
+
+[node name="HostButton" type="Button" parent="MainUI/VBoxContainer" unique_id=1261595068]
+layout_mode = 2
+text = "Tạo phòng"
+
+[node name="JoinButton" type="Button" parent="MainUI/VBoxContainer" unique_id=1308335942]
+layout_mode = 2
+text = "vào phòng"
+
+[node name="IPInput" type="LineEdit" parent="MainUI/VBoxContainer" unique_id=1334981511]
+layout_mode = 2
+text = "127.0.0.1"
+placeholder_text = "127.0.0.1"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="MainUI" unique_id=798211404]
+_spawnable_scenes = PackedStringArray("uid://bu2qp8q7o4y04")
+
 [node name="NetworkManager" type="Node2D" parent="." unique_id=615244548]
 script = ExtResource("1_vcsgt")
 player_scene = ExtResource("4_nxtc6")
@@ -135,6 +167,5 @@ script = ExtResource("3_c01mt")
 godot_4_3_compatibility = false
 metadata/_custom_type_script = "uid://cjk8nronimk5r"
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=798211404]
-_spawnable_scenes = PackedStringArray("uid://bu2qp8q7o4y04")
-spawn_path = NodePath("..")
+[connection signal="pressed" from="MainUI/VBoxContainer/HostButton" to="MainUI" method="_on_host_button_pressed"]
+[connection signal="pressed" from="MainUI/VBoxContainer/JoinButton" to="MainUI" method="_on_join_button_pressed"]
