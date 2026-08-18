@@ -57,6 +57,9 @@ func _on_join_button_pressed():
 		
 	multiplayer.multiplayer_peer = peer
 
+    # Ẩn UI Menu đi sau khi Join thành công
+	menu_container.hide()
+
 # --- XỬ LÝ SỰ KIỆN MẠNG (SERVER SIDE) ---
 
 func _on_player_connected(id):
