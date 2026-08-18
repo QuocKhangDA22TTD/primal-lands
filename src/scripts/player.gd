@@ -8,7 +8,15 @@ extends CharacterBody2D
 # Biến lưu hướng nhìn gần nhất (mặc định ban đầu nhìn xuống)
 var last_direction: Vector2 = Vector2.DOWN
 
+func _enter_tree():
+	# Chỉ cho phép người sở hữu Node này được điều khiển
+	set_multiplayer_authority(name.to_int())
+
 func _physics_process(_delta: float) -> void:
+	# Nếu không phải nhân vật của máy này, bỏ qua nhận đầu vào phím
+	if not is_multiplayer_authority():
+		return
+	
 	handle_movement()
 	update_animation()
 
