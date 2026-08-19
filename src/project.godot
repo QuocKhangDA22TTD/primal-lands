@@ -14,6 +14,10 @@ config/name="primal-lands"
 run/main_scene="uid://qwotwt1skrpj"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
+[autoload]
+
+EventBus="*uid://cvgv2mjkxfee8"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/TileMapDual/plugin.cfg")
