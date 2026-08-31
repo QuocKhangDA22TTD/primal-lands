@@ -14,9 +14,14 @@ config/name="primal-lands"
 run/main_scene="uid://qwotwt1skrpj"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
+[audio]
+
+buses/default_bus_layout="uid://cbiox5nu1q87d"
+
 [autoload]
 
 EventBus="*uid://cvgv2mjkxfee8"
+AudioManager="*uid://bfuo5f3j5lj4x"
 
 [editor_plugins]
 

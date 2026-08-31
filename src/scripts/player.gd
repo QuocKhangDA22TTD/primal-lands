@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: float = 120.0
+@export var sfx_footstep: AudioStream
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
@@ -49,3 +50,8 @@ func update_animation() -> void:
 			anim_player.play("idle_up")
 		elif last_direction.y > 0:
 			anim_player.play("idle_down")
+
+func play_footstep_sfx() -> void:
+	if velocity != Vector2.ZERO:
+		var random_pitch := randf_range(0.9, 1.1)
+		EventBus.play_sfx_2d.emit(sfx_footstep, global_position, random_pitch)
