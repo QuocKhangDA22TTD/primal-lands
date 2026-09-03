@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://5sckwbosxj11"]
+
+[ext_resource type="PackedScene" uid="uid://l5t7drt1llyx" path="res://scenes/StaticEntityBase.tscn" id="1_avsvi"]
+[ext_resource type="Texture2D" uid="uid://bwodlt8cas7rs" path="res://assets/tree.png" id="2_vplca"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_viusy"]
+radius = 6.0827627
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qd6xs"]
+radius = 6.0
+
+[node name="Tree" unique_id=1547951854 instance=ExtResource("1_avsvi")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=1690138199]
+texture = ExtResource("2_vplca")
+offset = Vector2(0, -42)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1497473434]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_viusy")
+
+[node name="CollisionShape2D" parent="InteractionArea" parent_id_path=PackedInt32Array(1498901545) index="0" unique_id=814595415]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_qd6xs")
