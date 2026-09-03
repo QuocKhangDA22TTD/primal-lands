@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://l5t7drt1llyx"]
+
+[ext_resource type="Script" uid="uid://p4ieww5uqmnn" path="res://scripts/static_entity_base.gd" id="1_vurgw"]
+
+[node name="StaticEntityBase" type="StaticBody2D" unique_id=1547951854]
+script = ExtResource("1_vurgw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1690138199]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1497473434]
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1498901545]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=814595415]
