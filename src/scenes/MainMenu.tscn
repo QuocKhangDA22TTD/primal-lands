@@ -32,10 +32,16 @@ theme_override_constants/separation = 16
 custom_minimum_size = Vector2(256, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Chơi"
+text = "CHƠI ĐƠN"
+
+[node name="MultiplayerButton" type="Button" parent="Control/VBoxContainer" unique_id=910923651]
+custom_minimum_size = Vector2(256, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "NHIỀU NGƯỜI CHƠI"
 
 [node name="QuitButton" type="Button" parent="Control/VBoxContainer" unique_id=271894074]
 custom_minimum_size = Vector2(256, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Thoát"
+text = "THOÁT"
