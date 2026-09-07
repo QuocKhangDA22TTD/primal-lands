@@ -14,3 +14,6 @@ func _on_start_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+func _on_multiplayer_button_pressed() -> void:
+	EventBus.request_start_multiplayer_menu.emit()

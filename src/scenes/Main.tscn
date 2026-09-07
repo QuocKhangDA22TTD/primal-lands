@@ -3,11 +3,13 @@
 [ext_resource type="Script" uid="uid://c3pqvpglxhkqg" path="res://scripts/main.gd" id="1_elqb8"]
 [ext_resource type="PackedScene" uid="uid://bexrebgjnagrm" path="res://scenes/MainMenu.tscn" id="2_rvslj"]
 [ext_resource type="PackedScene" uid="uid://b7fxy2y22fslx" path="res://scenes/Singleplayer.tscn" id="3_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://j1ukpk01xlgr" path="res://scenes/MultiplayerMenu.tscn" id="4_rarhs"]
 
 [node name="Main" type="Node2D" unique_id=1354294537]
 script = ExtResource("1_elqb8")
 main_menu_scene = ExtResource("2_rvslj")
 singleplayer_game_scene = ExtResource("3_0bbpv")
+multiplayer_menu_scene = ExtResource("4_rarhs")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1608691225]
 
