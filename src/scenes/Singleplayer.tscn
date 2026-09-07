@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://b7fxy2y22fslx"]
 
 [ext_resource type="Script" uid="uid://bauokgevukmrj" path="res://scripts/world_generation.gd" id="1_k7lwj"]
+[ext_resource type="Script" uid="uid://bh2qogp5cdem2" path="res://scripts/static_entity_data.gd" id="2_3ubp5"]
 [ext_resource type="Material" uid="uid://cmbcfxlkxxnwq" path="res://addons/TileMapDual/ghost_material.tres" id="2_sjff8"]
+[ext_resource type="Resource" uid="uid://c8hbd2pxh8n0r" path="res://resources/sed_tree.tres" id="3_3f04b"]
 [ext_resource type="Texture2D" uid="uid://c01k0yb707ihk" path="res://assets/ground.png" id="3_3ubp5"]
 [ext_resource type="Script" uid="uid://cjk8nronimk5r" path="res://addons/TileMapDual/tile_map_dual.gd" id="4_3f04b"]
 [ext_resource type="PackedScene" uid="uid://bu2qp8q7o4y04" path="res://scenes/Player.tscn" id="5_0r3e3"]
@@ -119,10 +121,12 @@ sources/0 = SubResource("TileSetAtlasSource_b2v0n")
 
 [node name="Singleplayer" type="Node2D" unique_id=1895610546]
 
-[node name="WorldGeneration" type="Node2D" parent="." unique_id=468832655 node_paths=PackedStringArray("player", "tilemap_layer")]
+[node name="WorldGeneration" type="Node2D" parent="." unique_id=468832655 node_paths=PackedStringArray("player", "tilemap_layer", "entity_container")]
 script = ExtResource("1_k7lwj")
-player = NodePath("../Player")
+player = NodePath("../EntityContainer/Player")
 tilemap_layer = NodePath("../TileMapDual")
+entity_container = NodePath("../EntityContainer")
+entity_types = Array[ExtResource("2_3ubp5")]([ExtResource("3_3f04b")])
 
 [node name="TileMapDual" type="TileMapLayer" parent="." unique_id=711120560]
 material = ExtResource("2_sjff8")
@@ -131,4 +135,7 @@ script = ExtResource("4_3f04b")
 godot_4_3_compatibility = false
 metadata/_custom_type_script = "uid://cjk8nronimk5r"
 
-[node name="Player" parent="." unique_id=937704250 instance=ExtResource("5_0r3e3")]
+[node name="EntityContainer" type="Node2D" parent="." unique_id=1133998840]
+y_sort_enabled = true
+
+[node name="Player" parent="EntityContainer" unique_id=937704250 instance=ExtResource("5_0r3e3")]
