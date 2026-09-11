@@ -8,7 +8,7 @@
 [node name="Main" type="Node2D" unique_id=1354294537]
 script = ExtResource("1_elqb8")
 main_menu_scene = ExtResource("2_rvslj")
-singleplayer_game_scene = ExtResource("3_0bbpv")
+world_scene = ExtResource("3_0bbpv")
 multiplayer_menu_scene = ExtResource("4_rarhs")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1608691225]

@@ -5,7 +5,7 @@ extends Node
 signal request_back_to_menu
 signal request_start_singleplayer
 signal request_start_multiplayer_menu
-signal request_start_multiplayer(host_ip, port)
+signal request_start_multiplayer(is_host: bool, host_ip: String, port: int)
 
 
 # --- AUDIO SIGNALS ---

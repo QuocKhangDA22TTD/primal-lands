@@ -2,9 +2,8 @@
 extends Node
 
 @export var main_menu_scene: PackedScene
-@export var singleplayer_game_scene: PackedScene
+@export var world_scene: PackedScene
 @export var multiplayer_menu_scene: PackedScene
-# @export var multiplayer_game_scene: PackedScene
 
 @onready var scene_container: Node = $CurrentSceneNode
 
@@ -14,7 +13,7 @@ func _ready() -> void:
 	# Lắng nghe các yêu cầu từ EventBus
 	EventBus.request_start_singleplayer.connect(_load_singleplayer_game)
 	EventBus.request_start_multiplayer_menu.connect(_load_multiplayer_menu)
-	# EventBus.request_start_multiplayer.connect(_load_multiplayer_game)
+	EventBus.request_start_multiplayer.connect(_load_multiplayer_game)
 	EventBus.request_back_to_menu.connect(_load_main_menu)
 	
 	# Khởi chạy ban đầu
@@ -32,7 +31,11 @@ func _load_main_menu() -> void:
 
 func _load_singleplayer_game() -> void:
 	_clear_current_scene()
-	current_scene = singleplayer_game_scene.instantiate()
+
+	# Đảm bảo không dính cấu hình mạng nào khi chơi Offline
+	NetworkManager.close_connection()
+
+	current_scene = world_scene.instantiate()
 	scene_container.add_child(current_scene)
 
 func _load_multiplayer_menu() -> void:
@@ -40,12 +43,15 @@ func _load_multiplayer_menu() -> void:
 	current_scene = multiplayer_menu_scene.instantiate()
 	scene_container.add_child(current_scene)
 
-# func _load_multiplayer_game(ip: String, port: int) -> void:
-# 	_clear_current_scene()
-# 	var mp_scene = multiplayer_game_scene.instantiate()
-# 	# Có thể truyền dữ liệu khởi tạo mạng vào scene multiplayer ở đây
-# 	if mp_scene.has_method("setup_network"):
-# 		mp_scene.setup_network(ip, port)
+func _load_multiplayer_game(is_host: bool, ip: String, port: int) -> void:
+	_clear_current_scene()
+
+	# Khởi tạo cấu hình mạng ENet thông qua NetworkManager
+	if is_host:
+		NetworkManager.host_game(port)
+	else:
+		NetworkManager.join_game(ip, port)
 		
-# 	current_scene = mp_scene
-# 	scene_container.add_child(current_scene)
+	# Nạp chung Scene Gameplay hiện có[cite: 2]
+	current_scene = world_scene.instantiate()
+	scene_container.add_child(current_scene)
