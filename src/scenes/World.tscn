@@ -119,7 +119,7 @@ terrain_set_0/terrain_1/name = "FG -grass.png"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_b2v0n")
 
-[node name="Singleplayer" type="Node2D" unique_id=1895610546]
+[node name="World" type="Node2D" unique_id=1895610546]
 
 [node name="WorldGeneration" type="Node2D" parent="." unique_id=468832655 node_paths=PackedStringArray("player", "tilemap_layer", "entity_container")]
 script = ExtResource("1_k7lwj")
