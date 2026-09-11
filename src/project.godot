@@ -22,6 +22,7 @@ buses/default_bus_layout="uid://cbiox5nu1q87d"
 
 EventBus="*uid://cvgv2mjkxfee8"
 AudioManager="*uid://bfuo5f3j5lj4x"
+NetworkManager="*uid://ddugjfgtovto6"
 
 [editor_plugins]
 
