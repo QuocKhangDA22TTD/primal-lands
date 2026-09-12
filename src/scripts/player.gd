@@ -5,11 +5,31 @@ extends CharacterBody2D
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var camera: Camera2D = $Camera2D
 
 # Biến lưu hướng nhìn gần nhất (mặc định ban đầu nhìn xuống)
 var last_direction: Vector2 = Vector2.DOWN
 
+func _enter_tree() -> void:
+	# Gán quyền điều khiển dựa trên Tên Node (chính là peer_id dạng String)
+	set_multiplayer_authority(name.to_int())
+
+func _ready() -> void:
+	# Kiểm tra nếu đây KHÔNG PHẢI là Player của máy hiện tại
+	if not is_multiplayer_authority():
+		# Tắt Camera của Player khác đi
+		if camera:
+			camera.enabled = false
+	else:
+		# Bật Camera lên nếu đây chính là Player của máy này
+		if camera:
+			camera.enabled = true
+
 func _physics_process(_delta: float) -> void:
+	# Nếu không phải chủ sở hữu của Player này thì bỏ qua việc xử lý
+	if not is_multiplayer_authority():
+		return
+	
 	handle_movement()
 	update_animation()
 

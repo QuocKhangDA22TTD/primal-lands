@@ -1,6 +1,5 @@
 extends Node2D
 
-@export var player: Node2D
 @export var tilemap_layer: TileMapLayer
 @export var entity_container: Node2D
 @export var entity_types: Array[StaticEntityData] = [] # Kéo thả các Resource thực thể vào đây từ Inspector
@@ -17,20 +16,18 @@ var entity_noise := FastNoiseLite.new() # Noise phụ dùng riêng cho thực th
 var last_player_chunk := Vector2i(999999, 999999) # Biến này lưu trữ Chunk cuối cùng mà người chơi đứng, để tránh việc sinh lại các Chunk không cần thiết
 var is_updating := false # Biến này giúp tránh việc sinh nhiều Chunk cùng lúc, gây lag hoặc treo game
 
-func _ready() -> void:
-	var base_seed := randi()
-	noise.seed = base_seed # Sinh ra một seed ngẫu nhiên để tạo ra các giá trị noise khác nhau mỗi lần chạy game
-	noise.frequency = 0.05 # Tần số của noise, giá trị này ảnh hưởng đến độ chi tiết của địa hình
+var player_node: Node2D
+var world_seed: int = 0
 
-	# Seed riêng cho entity_noise để không phụ thuộc hoàn toàn vào cấu trúc địa hình
-	entity_noise.seed = base_seed + 1000
+func _ready() -> void:
+	noise.frequency = 0.05 # Tần số của noise, giá trị này ảnh hưởng đến độ chi tiết của địa hình
 	entity_noise.frequency = 0.15 # Tần số cao hơn để tạo mật độ phân bổ ngẫu nhiên dày hơn
 
 func _process(_delta: float) -> void:
-	if not player or is_updating: return # Nếu không có người chơi hoặc đang trong quá trình cập nhật Chunk, không làm gì cả
+	if not player_node or is_updating: return # Nếu không có người chơi hoặc đang trong quá trình cập nhật Chunk, không làm gì cả
 	
 	# Lấy vị trí tile hiện tại của người chơi trong TileMap
-	var player_tile := tilemap_layer.local_to_map(player.global_position)
+	var player_tile := tilemap_layer.local_to_map(player_node.global_position)
 
 	# Tính toán Chunk hiện tại mà người chơi đang đứng dựa trên vị trí tile của họ
 	var current_chunk := Vector2i(floori(float(player_tile.x) / CHUNK_SIZE), floori(float(player_tile.y) / CHUNK_SIZE))
@@ -137,3 +134,13 @@ func clear_chunk_entities(chunk_pos: Vector2i) -> void:
 		if is_instance_valid(container):
 			container.queue_free() # Dọn sạch toàn bộ Node Cây/Đá thuộc Chunk này khỏi RAM
 		chunk_entities.erase(chunk_pos)
+
+func setup_world_data(p_seed: int, target_player: Node2D) -> void:
+	world_seed = p_seed
+	noise.seed = world_seed
+	entity_noise.seed = world_seed + 1000
+	
+	player_node = target_player
+	
+	# Reset lại trạng thái để ép ép game load ngay Chunk xung quanh Player
+	last_player_chunk = Vector2i(999999, 999999)
